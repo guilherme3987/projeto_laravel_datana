@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImportadorController; // Importando controlador
 /*
 Route::get('/', function () {
     return view('welcome');
 });*/
 
 Route::get('/', function(){
-    return view('pages/index');
+    return view('pages.index');
 }) ->name('index');
 
 

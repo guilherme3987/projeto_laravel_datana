@@ -487,4 +487,207 @@ a{
         margin-top: 150px;   
     }
 }
-  
+ 
+
+
+/* --- dash --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container-csv { /* Renomeado de .container para .container-csv conforme seu HTML */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.header-form {
+    margin-bottom: 20px;
+    /* Ajuste de espaçamento para o título e descrição */
+    padding: 0 15px; 
+}
+
+.header-form h2 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.header-form p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 15px; /* Adicionado padding para garantir que os elementos não encostem nas bordas do container */
+}
+
+.file-upload-wrapper {
+    width: 100%; /* Ocupa a largura total disponível */
+    max-width: 350px; /* Um pouco mais largo que o anterior para acomodar os elementos */
+    border: 2px dashed #a0a0a0; /* Cor da borda mais neutra */
+    border-radius: 8px;
+    padding: 5px; /* Reduzido o padding para não empurrar os elementos demais */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex; /* Adicionado display flex para controlar os elementos internos */
+    justify-content: space-between; /* Distribui o nome do arquivo e o botão */
+    align-items: center; /* Alinha verticalmente */
+}
+
+.file-upload-wrapper:hover {
+    border-color: #007bff;
+    background-color: #f0f8ff; /* Cor mais suave no hover */
+}
+
+.file-label {
+    display: flex; /* Tornar a label flexível para alinhar o span do nome e o botão */
+    justify-content: space-between; /* Empurra o nome para um lado e o botão para o outro */
+    align-items: center;
+    width: 100%; /* Ocupa a largura total do wrapper */
+    font-size: 1em;
+    color: #6c757d;
+    padding: 5px; /* Um pouco de padding para afastar o conteúdo da borda interna */
+}
+
+.file-input {
+    display: none; /* Esconde o input original */
+}
+
+.file-name {
+    flex-grow: 1; /* Permite que o nome do arquivo ocupe o espaço restante */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px; /* Espaço entre o nome do arquivo e o botão */
+    text-align: left; /* Alinha o texto à esquerda */
+    padding-left: 5px; /* Pequeno padding para o nome do arquivo */
+}
+
+.select-button {
+    background-color: #0d47a1; /* Azul escuro, mais contraste */
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Evita que o texto "Escolher Arquivo" quebre em duas linhas */
+}
+
+.select-button:hover {
+    background-color: #083b8a; /* Azul mais escuro no hover */
+}
+
+.submit-button {
+    background-color: #1a73e8; /* Azul primário do Google, mais moderno */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 350px; /* Ajustado para alinhar com o wrapper do arquivo */
+}
+
+.submit-button:hover {
+    background-color: #0c60c2;
+}
+
+/* Mensagens de sucesso ou erro */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 15px; /* Ajuste para alinhar com o padding do formulário */
+    margin-right: 15px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Media query para dispositivos móveis (largura até 430px) */
+@media (max-width: 430px) {
+    body {
+        padding: 0; /* Remove padding do body para mobile */
+    }
+
+    .container-csv {
+        box-shadow: none;
+        padding: 20px 10px; /* Reduz padding para mobile */
+        border-radius: 0;
+    }
+
+    .header-form {
+        padding: 0 10px;
+    }
+
+    .upload-form {
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .file-upload-wrapper {
+        max-width: 100%; /* Ocupa a largura total disponível no mobile */
+        padding: 8px;
+    }
+
+    .file-label {
+        flex-direction: column; /* Coloca o nome do arquivo e o botão em colunas para telas pequenas */
+        align-items: flex-start; /* Alinha à esquerda na coluna */
+        gap: 5px; /* Espaçamento entre o nome e o botão */
+        padding: 0;
+    }
+
+    .file-name {
+        margin-right: 0; /* Remove margem direita */
+        padding-left: 0;
+        width: 100%; /* Ocupa a largura total */
+        text-align: center; /* Centraliza o nome do arquivo */
+        order: 2; /* Move o nome do arquivo para baixo do botão */
+    }
+
+    .select-button {
+        width: 100%; /* Botão ocupa largura total */
+        text-align: center;
+        order: 1; /* Move o botão para cima do nome do arquivo */
+    }
+
+    .submit-button {
+        max-width: 100%; /* Ocupa a largura total no mobile */
+    }
+
+    .message {
+        padding: 10px;
+        font-size: 0.9em;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
