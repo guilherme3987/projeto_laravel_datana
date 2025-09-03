@@ -8,7 +8,24 @@
 
 </head>
 <body>
-
+<header class="navbar">
+    <div class="navbar-logo">
+        <img src="images/logo.png" alt="Logo da Empresa"> 
+    </div>
+    <nav>
+        <ul class="navbar-nav" id="navbar-nav">
+            <li class="nav-item"><a href="{{ route('index') }}" class="nav-link">Início</a></li>
+            <li class="nav-item"><a href="#section1" class="nav-link">Sobre</a></li>
+            <li class="nav-item"><a href="#section2" class="nav-link">Funcionalidades</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Contato</a></li>
+        </ul>
+    </nav>
+    <button class="menu-toggle" aria-controls="nav-links-container" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+</header>
     <section id="section-dash">
         <div class="container-csv">
             <div class="header-form">
@@ -37,7 +54,7 @@
         </div>
 
     </section>
-    <script src="{{ asset(path: 'js/script_dash.js') }}"></script>
+    <script src="{{ asset(path: 'js/script.js') }}"></script>
 
 
 </body>
