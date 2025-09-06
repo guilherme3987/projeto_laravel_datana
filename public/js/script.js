@@ -1,144 +1,53 @@
-// Script para o menu responsivo e ScrollSpy
 document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navbar = document.querySelector('.navbar');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navbar = document.querySelector('.navbar');
 
-    menuToggle.addEventListener('click', () => {
-        // Adiciona ou remove a classe 'menu-open' no header
-        navbar.classList.toggle('menu-open');
-        
-        // Atualiza o atributo aria-expanded para acessibilidade
-        const isExpanded = navbar.classList.contains('menu-open');
-        menuToggle.setAttribute('aria-expanded', isExpanded);
-    });
-});
-function smoothScroll(target, duration) {
-  const targetElement = document.querySelector(target);
-  const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  let startTime = null;
+  menuToggle.addEventListener('click', () => {
+      // Adiciona ou remove a classe 'menu-open' no header
+      navbar.classList.toggle('menu-open');
+      
+      // Atualiza o atributo aria-expanded para acessibilidade
+      const isExpanded = navbar.classList.contains('menu-open');
+      menuToggle.setAttribute('aria-expanded', isExpanded);
+  });
 
-  function animation(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const run = ease(timeElapsed, startPosition, distance, duration);
-      window.scrollTo(0, run);
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-  }
-
-  // Função de easing para suavizar a animação
-  function ease(t, b, c, d) {
-      t /= d / 2;
-      if (t < 1) return c / 2 * t * t + b;
-      t--;
-      return -c / 2 * (t * (t - 2) - 1) + b;
-  }
-
-  requestAnimationFrame(animation);
-}
-
-// Adiciona event listeners para os links da navbar
-document.addEventListener('DOMContentLoaded', function() {
+  // Adiciona event listeners para os links da navbar para rolagem suave
   const navLinks = document.querySelectorAll('.nav-link');
-  
+
   navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+      link.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+
           // Verifica se o link é uma âncora (contém #)
-          if (this.getAttribute('href').includes('#')) {
+          if (href && href.startsWith('#')) {
               e.preventDefault();
-              
-              const targetId = this.getAttribute('href').split('#')[1];
-              
-              // Se for um link para a mesma página (sem ../index.php)
-              if (this.getAttribute('href').startsWith('#')) {
-                  smoothScroll('#' + targetId, 1000);
-              } 
-              // Se for um link com ../index.php#section
-              else if (this.getAttribute('href').includes('../index.php#')) {
-                  // Verifica se já está na página index.php
-                  if (window.location.pathname.endsWith('index.php')) {
-                      smoothScroll('#' + targetId, 1000);
-                  } else {
-                      // Se não estiver na página index, redireciona primeiro
-                      window.location.href = '../index.php';
-                      // Adiciona a seção alvo ao URL para scroll após carregar
-                      window.location.hash = targetId;
-                  }
+
+              const targetId = href.substring(1); // Remove o '#' do ID
+              const targetElement = document.getElementById(targetId);
+
+              if (targetElement) {
+                  // Rola suavemente até o elemento alvo usando a API nativa
+                  targetElement.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                  });
               }
           }
       });
   });
+
+  // Script para exibir o nome do arquivo selecionado (do seu código anterior)
+  const fileInput = document.getElementById('csv_file');
+  const fileNameElement = document.querySelector('.file-name');
+  
+  if (fileInput) { 
+      fileInput.addEventListener('change', function(e) {
+          if (e.target.files.length > 0) {
+              const fileName = e.target.files[0].name;
+              fileNameElement.textContent = fileName;
+          } else {
+              fileNameElement.textContent = 'Nenhum arquivo selecionado';
+          }
+      });
+  }
 });
-
-  
-    // Atualizar as classes 'active' para refletir a área visível da página, exceto na seção "programacao"
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("a.nav-link");
-  
-    function updateActiveLink() {
-      let currentSection = "";
-  
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - OFFSET;
-        const sectionHeight = section.offsetHeight;
-  
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-          currentSection = `#${section.id}`;
-        }
-      });
-  
-      navLinks.forEach((link) => {
-  
-  
-        // Adicionar evento de rolagem para atualizar as classes 'active'
-        window.addEventListener("scroll", updateActiveLink);
-  
-        // Atualizar as classes 'active' ao carregar a página
-        updateActiveLink();
-  
-        // Toggle collapsed class on navbar-toggler
-        const navbarToggler = document.querySelector(".navbar-toggler");
-        if (navbarToggler) {
-          navbarToggler.addEventListener("click", function () {
-            this.classList.toggle("collapsed");
-          });
-        }
-  
-        // Collapse navbar when clicking on the brand link
-        const navbarBrand = document.querySelector("a.navbar-brand");
-        if (navbarBrand) {
-          navbarBrand.addEventListener("click", function () {
-            const navbarCollapse = document.querySelector(".navbar-collapse");
-            if (navbarCollapse && navbarCollapse.classList.contains("show")) {
-              navbarCollapse.classList.remove("show");
-            }
-          });
-        }
-      });
-  
-      // Adicionar evento de rolagem para atualizar as classes 'active'
-      window.addEventListener("scroll", updateActiveLink);
-  
-      // Atualizar as classes 'active' ao carregar a página
-      updateActiveLink();
-  
-    }
-
-  
-    document.addEventListener('DOMContentLoaded', function() {
-      // Todo o seu código de manipulação do DOM deve ficar aqui dentro
-      const fileInput = document.getElementById('csv_file');
-      const fileNameElement = document.querySelector('.file-name');
-      
-      if (fileInput) { // Adiciona uma verificação para garantir que o elemento existe
-          fileInput.addEventListener('change', function(e) {
-              if (e.target.files.length > 0) {
-                  const fileName = e.target.files[0].name;
-                  fileNameElement.textContent = fileName;
-              } else {
-                  fileNameElement.textContent = 'Nenhum arquivo selecionado';
-              }
-          });
-      }
-  });

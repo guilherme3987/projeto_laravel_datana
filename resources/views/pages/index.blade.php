@@ -23,9 +23,9 @@
     <nav>
         <ul class="navbar-nav" id="navbar-nav">
             <li class="nav-item"><a href="{{ route('index') }}" class="nav-link">Início</a></li>
-            <li class="nav-item"><a href="#section1" class="nav-link">Sobre</a></li>
-            <li class="nav-item"><a href="#section2" class="nav-link">Funcionalidades</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Contato</a></li>
+            <li class="nav-item"><a href="{{ route('index') }}#section1" class="nav-link">Sobre</a></li>
+            <li class="nav-item"><a href="{{ route('index') }}#section2" class="nav-link">Funcionalidades</a></li>
+            <li class="nav-item"><a href="{{ route('index') }}" class="nav-link">Contato</a></li>
         </ul>
     </nav>
     <button class="menu-toggle" aria-controls="nav-links-container" aria-expanded="false">
@@ -45,7 +45,7 @@
     </div>
 </section>
 
-<section id="section1">
+<section id="section1" href="#section1">
         <h3>Elabore sua Estratégia com  DatAna</h3>
             
         <p>O DatAna representa a simplicidade de que você precisa.  Sem configurações complexas, sem desperdício de tempo.  Faça upload e vá direto ao que importa: seus insights. Obtenha insights práticos, análises preditivas e relatórios automatizados que impulsionam o crescimento dos seus negócios.</p>
@@ -57,7 +57,7 @@
         
 </section>
 
-<section id="section2">
+<section id="section2" href="#section2">
     <h1>A análise de dados descomplicada</h1>
     <div class="blocks-container">
         <div id="block-stats">
