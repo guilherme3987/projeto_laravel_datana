@@ -41,6 +41,11 @@
                     </label>
                     <input type="file" name="csv_file" id="csv_file" accept=".csv" required class="file-input">
                 </div>
+
+                @error('csv_file')
+                    <div class="validation-error">{{ $message }}</div>
+                @enderror
+
                 <button type="submit" class="submit-button">Importar CSV</button>
             </form>
 
